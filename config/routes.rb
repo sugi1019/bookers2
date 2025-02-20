@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   resources :books,except: [:new,]
   resources :users,except: [:new, :destroy]
-
+  get 'home/about' => 'homes#about'
 
   root 'homes#top'
 end
