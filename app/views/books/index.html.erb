@@ -1,8 +1,8 @@
 <!-- バリデーションエラー検出時 -->
-<% if @error&.errors&.any? %>
-	<h3><%= @error.errors.count %>error prohibited this obj from being saved:</h3>
+<% if @book&.errors&.any? %>
+	<h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
 	<ul>
-		<% @error.errors.full_messages.each do |message| %>
+		<% @book.errors.full_messages.each do |message| %>
 			<li><%= message %></li>
 		<% end %>
 	</ul>
