@@ -1,7 +1,19 @@
+
 <div class='container px-5 px-sm-0 mt-3'>
 	<div class='row justify-content-center'>
     <div class="col-sm-12 col-md8 col-lg-5 px-sm-0 mx-autp">
-    <h1>Editing Book</h1>
+      <h1>Editing Book</h1>
+      <!-- バリデーションエラー検出時 -->
+      <% if @book.errors.any? %>
+        <h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+
       <%= form_with model: @book do |f| %>
         <%= f.label :title %><br />
         <%= f.text_field :title, class: "form-control ", autofocus: true, autocomplete: "title" %>

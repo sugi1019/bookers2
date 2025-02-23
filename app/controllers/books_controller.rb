@@ -18,8 +18,11 @@ class BooksController < ApplicationController
       flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book)
     else
-      # まだわかんない
-      render :new
+      @error = @book
+      @user = current_user
+      @book = Book.new
+      @books = @user.books 
+      render "books/index"
     end
   end
 
@@ -29,9 +32,12 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.update(book_params)
-    flash[:notice] = "You have updated book successfully."
-    redirect_to book_path(@book)
+    if @book.update(book_params)
+      flash[:notice] = "You have updated book successfully."
+      redirect_to book_path(@book)
+    else
+      render :edit
+    end
   end
 
   def destroy
