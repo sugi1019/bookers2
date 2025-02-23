@@ -2,9 +2,22 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:top, :about] # top, about の2つのアクションのみ、ログイン無しでもアクセス可能にする
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def after_sign_up_path_for(resource)
+    flash[:notice] = "Welcome! You have signed up successfully."
+    user_path(current_user)
+  end
+
   def after_sign_in_path_for(resource)
+    flash[:notice] = "Signed in successfully."
     user_path(current_user) # ログインした直後は、ユーザーの詳細ページに遷移
   end
+
+  def after_sign_out_path_for(resource)
+    flash[:notice] = "Signed out successfully."
+    root_path
+  end
+
+
 
   protected
   def configure_permitted_parameters

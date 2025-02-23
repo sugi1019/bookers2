@@ -14,7 +14,10 @@
   <body>
   
   <%= render 'layouts/header' %>   
-  <main>  
+  <main> 
+  <!-- フラッシュメッセージ -->
+	<%= flash[:notice] %>
+
                            
    <%= yield %>
   </main>                          

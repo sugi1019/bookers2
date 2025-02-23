@@ -6,15 +6,16 @@ class BooksController < ApplicationController
   end
 
   def show
-    @books = Book.find(params[:id])    # 本の情報を取得
-    @user = @books.user                 # 本に関連するユーザーを取得
-    @book = Book.new                    # 新しい本オブジェクトを作成
+    @books = Book.find(params[:id])
+    @user = @books.user
+    @book = Book.new
   end
   
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
+      flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book)
     else
       # まだわかんない
@@ -29,6 +30,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     @book.update(book_params)
+    flash[:notice] = "You have updated book successfully."
     redirect_to book_path(@book)
   end
 
